@@ -19,7 +19,16 @@ jobs:
         run: npm install
 
       - name: ESLint
-        run: npm run fix .
+        run: |
+          npm run fix .
+          warning_count=$(eslint "src/**/*.js" "." --quiet --format=compact | grep -o 'warning' | wc -l)
+          if [ "$warning_count" -gt 30 ]; then
+            echo "Exceeded the maximum allowed warnings. Failing the build."
+            exit 1
+          fi
+
+      # - name: ESLint
+      #   run: npm run fix .
         
       - name: Prettier
         run: npm run prettier
