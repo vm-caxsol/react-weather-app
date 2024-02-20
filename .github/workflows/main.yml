@@ -21,11 +21,7 @@ jobs:
       - name: ESLint
         run: |
           npm run fix .
-          warning_count=$(eslint "src/**/*.js" "." --quiet --format=compact | grep -o 'warning' | wc -l)
-          if [ "$warning_count" -gt 30 ]; then
-            echo "Exceeded the maximum allowed warnings. Failing the build."
-            exit 1
-          fi
+          eslint --max-warnings=30 "src/**/*.js" "."
 
       # - name: ESLint
       #   run: npm run fix .
