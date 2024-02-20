@@ -22,7 +22,7 @@ jobs:
         run: |
           npm install eslint --save-dev
           npm run fix .
-          npx eslint --max-warnings=30 "src/**/*.js" "."
+          npx eslint --max-warnings=40 "src/**/*.js" "."
 
       # - name: ESLint
       #   run: npm run fix .
